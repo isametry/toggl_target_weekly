@@ -13,13 +13,13 @@ from dateutil.relativedelta import relativedelta, MO, SU
 from datetime import datetime
 
 # Toggl API Token
-API_TOKEN = 'b356550913a832f0a1fa0c22f9d995e3'
+API_TOKEN = 'TOKEN HERE BETWEEN THE QUOTES'
 
 # Target Configurations
-WORKING_HOURS_GOAL = 7
+WORKING_HOURS_GOAL = 35
 
 # Timezone
-TIMEZONE = '+02:00'
+TIMEZONE = '+01:00'
 
 # Week Days
 WEEK_DAYS = (MO, TU, WE, TH, FR, SA, SU)
@@ -139,7 +139,7 @@ class WorkingTime(object):
 
     @property
     def period_start(self):
-        return self.now + relativedelta(hour=0, minute=0, second=0, microsecond=0, weekday=MO)
+        return self.now + relativedelta(hour=0, minute=0, second=0, microsecond=0, weekday=MO(-1))
 
     @property
     def period_end(self):

@@ -7,18 +7,17 @@ Forked from the original toggle_target by @mos3abof, modified for **simpler usag
 Installation (on macOS)
 ---------------------
 
-1. Copy the folder to a location on the disk.
-2. Terminal:
+1. Download the script _"toggl_target_weekly.py"_.
+2. Open the script in a text editor and configure the following: 
+   * On **line 16,** place your actual Toggl API token (can be found on https://track.toggl.com/profile, bottom of the page).
+   * On **line 19,** choose your weekly hour goal.
+
+2. In Terminal, run the command below to install additional required packages:
 ```
-cd /Folder/Path/Here
+pip3 install python-dateutil requests
 ```
 
-```
-pip3 install -r requirements.txt
-```
 
-3. Wait for missing packages to finish installing.
-4. In **'config.py'**, place your actual Toggl API token – can be found on https://track.toggl.com/profile (bottom of the page).
 
 
 Usage
@@ -27,7 +26,7 @@ Usage
 To use the script run the following command :
 
 ```
-$ python run.py
+python3 toggl_target_weekly.py
 ```
 
 
