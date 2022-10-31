@@ -10,8 +10,8 @@ from datetime import datetime
 class WorkingTime(object):
     """Time and date calculations for working hours and days"""
 
-    def __init__(self, daily_hours, BUSINESS_DAYS, WEEK_DAYS):
-        self.daily_hours = daily_hours
+    def __init__(self, hour_goal, BUSINESS_DAYS, WEEK_DAYS):
+        self.goal_hours = hour_goal
         self.BUSINESS_DAYS = BUSINESS_DAYS
         self.WEEK_DAYS = WEEK_DAYS
 
@@ -55,7 +55,7 @@ class WorkingTime(object):
 
     @property
     def required_hours_this_period(self):
-        return self.total_business_days_count * self.daily_hours
+        return self.goal_hours
 
 
 if __name__ == '__main__':

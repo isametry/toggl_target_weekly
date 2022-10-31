@@ -79,7 +79,7 @@ def hilite(string, status, bold):
         # red
         attr.append('31')
     if status == None:
-        attr.append('33')
+        attr.append('34')
     if bold:
         attr.append('1')
     return '\x1b[%sm%s\x1b[0m' % (';'.join(attr), string)
