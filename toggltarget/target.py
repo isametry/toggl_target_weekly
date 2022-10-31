@@ -10,7 +10,7 @@ class Target(object):
 
     @property
     def minimum_hours(self):
-        return self.required_hours - (self.tolerance * self.required_hours)
+        return self.required_hours
 
     @property
     def left_to_minimum(self):
@@ -28,13 +28,11 @@ class Target(object):
 
     def get_required_daily_hours(self, business_days, days):
         normal_hours = self.left_to_required / max(business_days, 1)
-        crunch_hours = self.left_to_required / max(days, 1)
-        return (normal_hours, crunch_hours)
+        return (normal_hours)
 
     def get_minimum_daily_hours(self, business_days, days):
         normal_hours = self.left_to_minimum / max(business_days, 1)
-        crunch_hours = self.left_to_minimum / max(days, 1)
-        return (normal_hours, crunch_hours)
+        return (normal_hours)
 
 
 if __name__ == '__main__':

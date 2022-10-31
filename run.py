@@ -75,9 +75,11 @@ def hilite(string, status, bold):
     if status:
         # green
         attr.append('32')
-    else:
+    if not status:
         # red
         attr.append('31')
+    if status == None:
+        attr.append('33')
     if bold:
         attr.append('1')
     return '\x1b[%sm%s\x1b[0m' % (';'.join(attr), string)
@@ -88,43 +90,30 @@ def main():
     a = api.TogglAPI(config.API_TOKEN, config.TIMEZONE)
     t = target.Target()
 
-    print("Hi")
-    print("Checking Internet connectivity…")
     if not internet_on():
         print("No internet connection!")
         sys.exit()
-    print("Internet seems fine.")
-    print("\nTrying to connect to Toggl…\n")
     try:
-        t.achieved_hours = a.get_hours_tracked(start_date=w.month_start, end_date=w.now)
+        t.achieved_hours = a.get_hours_tracked(start_date=w.period_start, end_date=w.now)
     except:
         print("Toggle request failed!")
         sys.exit()
 
-    t.required_hours = w.required_hours_this_month
+    t.required_hours = w.required_hours_this_period
     t.tolerance = config.TOLERANCE_PERCENTAGE
 
-    normal_min_hours, crunch_min_hours = t.get_minimum_daily_hours(w.business_days_left_count, w.days_left_count)
 
-    print("So far this month, you have tracked", )
-    print(hilite("{0:.2f} hours".format(t.achieved_hours), True, True))
-    print("\nBusiness days left till deadline : {}".format(w.business_days_left_count))
-    print("Total days left till deadline : {}".format(w.days_left_count))
-    print("\nThis month targets [Required (minimum)] : {} ({})".format(w.required_hours_this_month,
-                                                                       w.required_hours_this_month - (
-                                                                               w.required_hours_this_month * config.TOLERANCE_PERCENTAGE)))
-    print("\nTo achieve the minimum:\n\tyou should log {0:.2f} hours every business day".format(normal_min_hours))
-    print("\tor log {0:.2f} hours every day".format(crunch_min_hours))
-    print("\tleft is : {0:.2f}".format(
-        (w.required_hours_this_month - (w.required_hours_this_month * config.TOLERANCE_PERCENTAGE)) - t.achieved_hours))
+    print("\nThis week's target:")
+    print(hilite("{0:.2f} hours".format(w.required_hours_this_period), None, True))
 
-    normal_required_hours, crunch_required_hours = t.get_required_daily_hours(w.business_days_left_count,
-                                                                              w.days_left_count)
+    goal_complete = (w.required_hours_this_period <= t.achieved_hours)
 
-    print(
-        "\nTo achieve the required :\n\tyou should log {0:.2f} hours every business day".format(normal_required_hours))
-    print("\tor log {0:.2f} hours every day".format(crunch_required_hours))
-    print("\tleft is : {0:.2f}".format(w.required_hours_this_month - t.achieved_hours))
+    print("\nDone so far:")
+    print(hilite("{0:.2f} hours".format(t.achieved_hours), goal_complete, True))
+
+    print("\nRemains:")
+    print(hilite("{0:.2f} hours".format(w.required_hours_this_period - t.achieved_hours), goal_complete, True))
+
     print("\nHow your progress looks:")
     bar = percentile_bar(t.achieved_percentage, config.TOLERANCE_PERCENTAGE)
     print(bar)
