@@ -89,18 +89,16 @@ def main():
     t = target.Target()
 
     print("Hi")
-    print("Checking Internet connectivity...")
+    print("Checking Internet connectivity…")
     if not internet_on():
-        print("OMG! There is no internet connection!")
-        print("Good Bye Cruel World!")
+        print("No internet connection!")
         sys.exit()
-    print("Internet seems fine!")
-    print("\nTrying to connect to Toggl, hang on!\n")
+    print("Internet seems fine.")
+    print("\nTrying to connect to Toggl…\n")
     try:
         t.achieved_hours = a.get_hours_tracked(start_date=w.month_start, end_date=w.now)
     except:
-        print("OMG! Toggle request failed for some mysterious reason!")
-        print("Good Bye Cruel World!")
+        print("Toggle request failed!")
         sys.exit()
 
     t.required_hours = w.required_hours_this_month
