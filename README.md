@@ -7,7 +7,7 @@ Forked from the original toggle_target by @mos3abof, modified for **simpler usag
 Installation (on macOS)
 ---------------------
 
-1. Download the script _"toggl_target_weekly.py"_.
+1. Download the script _"toggl_target_weekly.py"_ [HERE](https://github.com/isametry/toggl_target_weekly/releases/download/one-file/toggl_target_weekly.py).
 2. Open the script in a text editor and configure the following: 
    * On **line 16,** place your actual Toggl API token (can be found on https://track.toggl.com/profile, bottom of the page).
    * On **line 19,** choose your weekly hour goal.
