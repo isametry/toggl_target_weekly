@@ -12,7 +12,11 @@ Installation (on macOS)
    * On **line 16,** place your actual Toggl API token (can be found on https://track.toggl.com/profile, bottom of the page).
    * On **line 19,** choose your weekly hour goal.
 
-2. In Terminal, run the command below to install additional required packages:
+3. If you don't have pip, run in the Terminal:
+```
+python3 -m ensurepip
+```
+4. Then run the command below to install additional required packages:
 ```
 pip3 install python-dateutil requests
 ```
